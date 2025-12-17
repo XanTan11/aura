@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Aura</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AURA FC</title>
+
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b1220;
+      color: #fff;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 18px;
+      background: #0f1b35;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    header img {
+      width: 54px;
+      height: 54px;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    header h1 { margin: 0; font-size: 22px; }
+    header p { margin: 4px 0 0; opacity: 0.75; font-size: 13px; }
+
+    .container {
+      padding: 18px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 18px;
+      margin: 24px 0 12px;
+      border-left: 4px solid #4da3ff;
+      padding-left: 10px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 520px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 820px) {
+      .grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (min-width: 1080px) {
+      .grid { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    .card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.15s ease;
+    }
+
+    .card:hover { transform: translateY(-2px); }
+
+    .photo {
+      width: 100%;
+      aspect-ratio: 16 / 11;
+      object-fit: cover;
+      display: block;
+    }
+
+    .info { padding: 12px; }
+    .name { margin: 0; font-size: 16px; }
+    .meta { margin-top: 6px; font-size: 13px; opacity: 0.8; }
+
+    .tag {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <img src="https://i.postimg.cc/Jh3VMVc6/Snimok-ekrana-2025-12-16-233959-removebg-preview.png">
+  <div>
+    <h1>AURA FC</h1>
+    <p>Официальный состав команды</p>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- ТРЕНЕРЫ -->
+  <h2 class="section-title">Тренерский состав</h2>
+  <div class="grid">
+
+    <article class="card">
+      <img class="photo" src="https://i.postimg.cc/rwVjPBZd/5334861423798063658.jpg">
+      <div class="info">
+        <h3 class="name">Гозалзаде Гусейн</h3>
+        <div class="meta">Главный тренер · 14 лет</div>
+        <div class="tag">Coach</div>
+      </div>
+    </article>
+
+    <article class="card">
+      <img class="photo" src="https://i.postimg.cc/FzGddByB/Snimok-ekrana-2025-12-16-235830.png">
+      <div class="info">
+        <h3 class="name">Мамедзаде Ибрагим</h3>
+        <div class="meta">Помощник тренера · 14 лет</div>
+        <div class="tag">Assistant</div>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- ОСНОВНОЙ СОСТАВ -->
+  <h2 class="section-title">Основной состав</h2>
+  <div class="grid">
+
+    <article class="card">
+      <img class="photo" src="https://i.postimg.cc/vBSPd3jL/Snimok-ekrana-2025-12-16-234518.png">
+      <div class="info">
+        <h3 class="name">№1 — Ахмедов Юсиф</h3>
+        <div class="meta">Вратарь · 14 лет</div>
+        <div class="tag">GK</div>
+      </div>
+    </article>
+
+    <article class="card">
+      <img class="photo" src="https://i.postimg.cc/Ls0HrMHC/Snimok-ekrana-2025-12-16-235616.png">
+      <div class="info">
+        <h3 class="name">№31 — Намик Рагимов</h3>
+        <div class="meta">Защитник · 14 лет</div>
+        <div class="tag">DF</div>
+      </div>
+    </article>
+
+    <article class="card">
+      <img class="photo" src="https://i.postimg.cc/hjxHpFhp/Snimok-ekrana-2025-12-16-235744.png">
+      <div class="info">
+        <h3 class="name">№11 — Джавадхан Ахмед</h3>
+        <div class="meta">Полузащитник · 14 лет</div>
+        <div class="tag">MF</div>
+      </div>
+    </article>
+
+    <article class="card">
+      <img class="photo" src="https://i.postimg.cc/6QS8CZGq/5334861423798063657.jpg">
+      <div class="info">
+        <h3 class="name">№14 — Али Талыбов</h3>
+        <div class="meta">Полузащитник · 14 лет</div>
+        <div class="tag">MF</div>
+      </div>
+    </article>
+
+    <article class="card">
+      <img class="photo" src="https://i.postimg.cc/TYYTYwpZ/Snimok-ekrana-2025-12-17-001050.png">
+      <div class="info">
+        <h3 class="name">№10 — Юсиф Юсифов</h3>
+        <div class="meta">Полузащитник · 13 лет</div>
+        <div class="tag">MF</div>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- ЗАМЕНЫ -->
+  <h2 class="section-title">Замены</h2>
+  <div class="grid">
+
+    <article class="card">
+      <img class="photo" src="https://i.postimg.cc/rwVjPBZd/5334861423798063658.jpg">
+      <div class="info">
+        <h3 class="name">№17 — Гозалзаде Гусейн</h3>
+        <div class="meta">Защитник · 14 лет</div>
+        <div class="tag">SUB</div>
+      </div>
+    </article>
+
+    <article class="card">
+      <img class="photo" src="https://i.postimg.cc/FzGddByB/Snimok-ekrana-2025-12-16-235830.png">
+      <div class="info">
+        <h3 class="name">№69 — Мамедзаде Ибрагим</h3>
+        <div class="meta">Полузащитник · 14 лет</div>
+        <div class="tag">SUB</div>
+      </div>
+    </article>
+
+    <article class="card">
+      <img class="photo" src="https://i.postimg.cc/W1cLq13N/5334861423798063686.jpg">
+      <div class="info">
+        <h3 class="name">№9 — Джафарзаде Микайл</h3>
+        <div class="meta">Полузащитник · 14 лет</div>
+        <div class="tag">SUB</div>
+      </div>
+    </article>
+
+  </div>
+
+</main>
+</body>
+</html>
+    
+  </body>
+  
+</html>
