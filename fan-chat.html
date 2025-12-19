@@ -1,0 +1,282 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AURA FC — Fan Chat</title>
+
+  <style>
+    *{box-sizing:border-box}
+    body{
+      margin:0;font-family:Arial,sans-serif;color:#fff;
+      background:
+        radial-gradient(900px 500px at 10% 10%, rgba(77,163,255,0.18), transparent 60%),
+        radial-gradient(900px 500px at 90% 20%, rgba(128,90,255,0.14), transparent 55%),
+        #0b1220;
+      min-height:100vh;display:flex;flex-direction:column;
+    }
+
+    header{
+      position:sticky;top:0;z-index:10;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:14px 16px;background:rgba(15,27,53,.78);
+      border-bottom:1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(10px);
+    }
+
+    .brand{display:flex;gap:12px;align-items:center;min-width:0}
+    .brand img{
+      width:44px;height:44px;border-radius:12px;object-fit:cover;
+      border:1px solid rgba(255,255,255,.12)
+    }
+    .brand h1{
+      margin:0;font-size:18px;line-height:1.1;
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+    }
+    .brand p{margin:4px 0 0;font-size:12px;opacity:.75}
+
+    .btn{
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.08);
+      color:#fff;padding:10px 12px;border-radius:12px;
+      cursor:pointer;text-decoration:none;font-size:13px;
+      white-space:nowrap;
+    }
+
+    main{width:min(980px,100%);margin:0 auto;padding:14px;flex:1 1 auto}
+
+    .panel{
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:18px;overflow:hidden;
+      box-shadow:0 14px 40px rgba(0,0,0,.25)
+    }
+
+    .topbar{
+      padding:12px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      display:flex;justify-content:space-between;align-items:center;gap:10px
+    }
+
+    .hint{font-size:12px;opacity:.75;line-height:1.35}
+
+    .messages{
+      height:clamp(360px,62vh,640px);
+      overflow:auto;padding:12px;
+      display:flex;flex-direction:column;gap:10px
+    }
+
+    .msg{display:flex;gap:10px;align-items:flex-start}
+
+    .avatar{
+      width:34px;height:34px;border-radius:12px;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.10);
+      display:grid;place-items:center;
+      font-weight:700;font-size:13px;flex:0 0 auto
+    }
+
+    .bubble{
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:16px;
+      padding:10px 12px;
+      min-width:0;max-width:100%;
+    }
+
+    .meta{display:flex;gap:8px;align-items:baseline;margin-bottom:4px}
+    .name{font-weight:700;font-size:13px}
+    .time{font-size:11px;opacity:.7}
+    .text{font-size:14px;line-height:1.35;white-space:pre-wrap;word-wrap:break-word}
+
+    form{
+      display:flex;gap:10px;flex-wrap:wrap;
+      padding:12px;border-top:1px solid rgba(255,255,255,.08)
+    }
+    .row{width:100%;display:grid;grid-template-columns:1fr;gap:10px}
+    @media(min-width:680px){.row{grid-template-columns:260px 1fr}}
+
+    .input{
+      width:100%;
+      padding:10px 12px;border-radius:14px;color:#fff;outline:none;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06)
+    }
+
+    .send{
+      padding:11px 14px;border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:linear-gradient(180deg, rgba(77,163,255,.35), rgba(128,90,255,.18));
+      color:#fff;font-weight:700;cursor:pointer;white-space:nowrap
+    }
+
+    .small{
+      font-size:12px;opacity:.7;padding: 0 12px 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="brand">
+      <img src="https://i.postimg.cc/Jh3VMVc6/Snimok-ekrana-2025-12-16-233959-removebg-preview.png" alt="AURA FC">
+      <div style="min-width:0">
+        <h1>AURA FC — Fan Chat</h1>
+        <p id="status">Подключение…</p>
+      </div>
+    </div>
+
+    <a class="btn" href="index.html">← Назад</a>
+  </header>
+
+  <main>
+    <section class="panel">
+      <div class="topbar">
+        <div class="hint">Общий чат: все видят сообщения сразу ✅</div>
+        <div class="hint" id="count"></div>
+      </div>
+
+      <div class="messages" id="messages"></div>
+
+      <form id="form">
+        <div class="row">
+          <input class="input" id="nick" maxlength="18" placeholder="Ник (например AuraFan)" />
+          <input class="input" id="text" maxlength="200" placeholder="Сообщение..." />
+        </div>
+        <button class="send" type="submit">Отправить</button>
+      </form>
+
+      <div class="small">Правила: без спама и оскорблений 🤝</div>
+    </section>
+  </main>
+
+  <!-- Firebase CDN -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+
+  <script>
+    // Вставь сюда свой config (Firebase console -> Project settings -> Web app)
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBbgCTVN5VovfaU_svpTM-Y0T7JBa3RpVs",
+  authDomain: "aura-73414.firebaseapp.com",
+  projectId: "aura-73414",
+  storageBucket: "aura-73414.firebasestorage.app",
+  messagingSenderId: "768724167502",
+  appId: "1:768724167502:web:cb2d7c03530a934f010c1f",
+  measurementId: "G-CEVT28QXRE"
+};
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    const statusEl = document.getElementById("status");
+    const countEl = document.getElementById("count");
+    const messagesEl = document.getElementById("messages");
+    const form = document.getElementById("form");
+    const nickEl = document.getElementById("nick");
+    const textEl = document.getElementById("text");
+
+    nickEl.value = localStorage.getItem("AURA_NICK") || "";
+
+    function fmtTime(ts){
+      const d = ts?.toDate ? ts.toDate() : new Date();
+      return d.toLocaleTimeString([], { hour:"2-digit", minute:"2-digit" });
+    }
+    function initials(n){
+      n = (n || "F").trim();
+      return (n[0] || "F").toUpperCase();
+    }
+
+    function addMsg(m){
+      const row = document.createElement("div");
+      row.className = "msg";
+
+      const av = document.createElement("div");
+      av.className = "avatar";
+      av.textContent = initials(m.nick);
+
+      const bubble = document.createElement("div");
+      bubble.className = "bubble";
+
+      const meta = document.createElement("div");
+      meta.className = "meta";
+
+      const name = document.createElement("div");
+      name.className = "name";
+      name.textContent = m.nick;
+
+      const time = document.createElement("div");
+      time.className = "time";
+      time.textContent = fmtTime(m.createdAt);
+
+      const text = document.createElement("div");
+      text.className = "text";
+      text.textContent = m.text;
+
+      meta.appendChild(name);
+      meta.appendChild(time);
+      bubble.appendChild(meta);
+      bubble.appendChild(text);
+
+      row.appendChild(av);
+      row.appendChild(bubble);
+
+      messagesEl.appendChild(row);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    async function start() {
+      try {
+        await auth.signInAnonymously();
+        statusEl.textContent = "Онлайн ✅";
+      } catch (e) {
+        statusEl.textContent = "Ошибка входа";
+        console.error(e);
+        return;
+      }
+
+      db.collection("messages")
+        .orderBy("createdAt", "asc")
+        .limitToLast(150)
+        .onSnapshot((snap) => {
+          messagesEl.innerHTML = "";
+          let total = 0;
+          snap.forEach((doc) => {
+            total++;
+            addMsg(doc.data());
+          });
+          countEl.textContent = `Сообщений: ${total}`;
+        }, (err) => {
+          statusEl.textContent = "Ошибка Firestore";
+          console.error(err);
+        });
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const nick = (nickEl.value || "").trim() || "Fan";
+      const text = (textEl.value || "").trim();
+      if (!text) return
+
+      localStorage.setItem("AURA_NICK", nick);
+      textEl.value = "";
+
+      try {
+        await db.collection("messages").add({
+          nick,
+          text,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+      } catch (e) {
+        console.error(e);
+        statusEl.textContent = "Не удалось отправить";
+      }
+    });
+
+    start();
+  </script>
+</body>
+</html>
