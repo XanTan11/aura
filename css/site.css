@@ -900,3 +900,54 @@ html{
 .section__head--stack .section__desc{
   margin-top: 6px;
 }
+
+
+/* =========================
+   SECTION HEADINGS (UNIFIED)
+   ========================= */
+
+/* делаем заголовки ВСЕХ секций слева и с норм отступами */
+.section__head{
+  display:flex;
+  flex-direction: column;   /* заголовок сверху, подзаголовок снизу */
+  align-items:flex-start;   /* ВСЕ СЛЕВА */
+  justify-content:flex-start;
+  gap: 8px;                 /* чтобы НЕ было "впритык" */
+  margin-bottom: 18px;
+}
+
+/* рамка и объем как у карточек */
+.section__title{
+  margin:0;
+  padding: 10px 14px;
+
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(16,20,60,.55), rgba(10,12,40,.35));
+
+  box-shadow: 0 10px 30px rgba(0,0,0,.22);
+  letter-spacing: .4px;
+
+  font-size: clamp(20px, 3vw, 32px);
+}
+
+/* подзаголовок под рамкой */
+.section__desc{
+  margin:0;
+  color: var(--muted);
+  font-size: 14px;
+  max-width: 620px;
+  line-height: 1.55;
+}
+
+/* на телефоне чуть компактнее */
+@media (max-width: 620px){
+  .section__title{
+    padding: 9px 12px;
+    border-radius: 13px;
+  }
+  .section__head{
+    gap: 7px;
+    margin-bottom: 16px;
+  }
+}
