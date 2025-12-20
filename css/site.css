@@ -880,3 +880,10 @@ html{
   font-size: 13px;
   color: var(--muted);
 }
+
+/* ===== LAST MATCH ALIGN FIX ===== */
+.match-head{
+  justify-content: flex-start; /* слева, как у всех */
+  align-items: flex-start;
+  text-align: left;
+}
