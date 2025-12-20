@@ -763,5 +763,9 @@ main, header, footer, section, .hero, .section, .footer{
 }
 /* чтобы якоря не залезали под sticky header */
 #last{
-  scroll-margin-top: 90px; /* подстрой если нужно */
+  scroll-margin-top: 100px; /* подстрой если нужно */
+}
+
+html{
+  scroll-behavior: smooth;
 }
