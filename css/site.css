@@ -477,3 +477,55 @@ main, header, footer, section, .hero, .section, .footer{
 
   box-shadow: 0 4px 14px rgba(240,208,122,.45);
 }
+
+/* ===== Kits 25/26 ===== */
+.kits{
+  display:flex;
+  flex-direction:column;
+  gap: 22px;
+}
+
+.kits__title{
+  margin: 0 0 10px;
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: .3px;
+}
+
+.kits__row{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.kit-card{
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--card1), var(--card2));
+  padding: 14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height: 220px;
+}
+
+.kit-card img{
+  max-width: 100%;
+  max-height: 260px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display:block;
+}
+
+@media (max-width: 620px){
+  .kits__row{
+    grid-template-columns: 1fr;
+  }
+  .kit-card{
+    min-height: 200px;
+  }
+  .kit-card img{
+    max-height: 220px;
+  }
+}
