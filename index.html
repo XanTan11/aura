@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Aura</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>AURA FC</title>
+
+
+	<style>
+		:root {
+			--bg0: #05070f;
+			--bg1: #070b14;
+			--bg2: #0b1220;
+			--text: #eaf0ff;
+			--muted: rgba(234,240,255,.70);
+			/* клубные цвета */
+			--blue: #2b52ff;
+			--violet: #7b61ff;
+			--gold: #ffd66b;
+			--radius: 18px;
+			--shadow: 0 18px 55px rgba(0,0,0,.55);
+		}
+
+		* {
+			box-sizing: border-box
+		}
+
+		html, body {
+			height: 100%
+		}
+
+		body {
+			margin: 0;
+			font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+			color: var(--text);
+			background: radial-gradient(900px 520px at 15% -10%, rgba(43,82,255,.18), transparent 62%), radial-gradient(900px 700px at 90% 10%, rgba(255,214,107,.12), transparent 58%), linear-gradient(180deg, var(--bg0), var(--bg2));
+			background-attachment: fixed;
+			min-height: 100vh;
+			overflow-x: hidden;
+		}
+
+			/* убирает “белую хрень” снизу у некоторых телефонов/браузеров */
+			body::after {
+				content: "";
+				position: fixed;
+				left: 0;
+				right: 0;
+				bottom: -1px;
+				height: 120px;
+				background: linear-gradient(180deg, transparent, rgba(0,0,0,.28));
+				pointer-events: none;
+				z-index: 0;
+			}
+
+		.glow {
+			position: fixed;
+			inset: 0;
+			pointer-events: none;
+			background: radial-gradient(220px 220px at 15% 25%, rgba(255,214,107,.10), transparent 60%), radial-gradient(280px 280px at 75% 30%, rgba(43,82,255,.12), transparent 62%);
+			filter: blur(10px);
+			opacity: .95;
+			z-index: 0;
+		}
+
+		header {
+			position: sticky;
+			top: 0;
+			z-index: 50;
+			backdrop-filter: blur(12px);
+			background: linear-gradient(180deg, rgba(8,12,22,.90), rgba(8,12,22,.60));
+			border-bottom: 1px solid rgba(255,255,255,.08);
+		}
+
+		.topbar {
+			max-width: 1200px;
+			margin: 0 auto;
+			padding: 14px 16px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 12px;
+		}
+
+		.brand {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			min-width: 0;
+		}
+
+		.top-logo-wrap {
+			width: 58px;
+			height: 58px;
+			border-radius: 18px;
+			padding: 2px;
+			background: linear-gradient(135deg, rgba(43,82,255,.85), rgba(255,214,107,.70));
+			box-shadow: 0 0 18px rgba(43,82,255,.22), 0 0 18px rgba(255,214,107,.16);
+			flex: 0 0 auto;
+			opacity: 0;
+			transform: translateY(-10px) scale(.92);
+			animation: appear 650ms ease-out forwards, floatLogo 3.2s ease-in-out 650ms infinite;
+		}
+
+		@keyframes appear {
+			to {
+				opacity: 1;
+				transform: translateY(0) scale(1)
+			}
+		}
+
+		@keyframes floatLogo {
+			0%,100% {
+				transform: translateY(0) rotate(-1deg)
+			}
+
+			50% {
+				transform: translateY(-5px) rotate(1deg)
+			}
+		}
+
+		.top-logo {
+			width: 100%;
+			height: 100%;
+			border-radius: 16px;
+			object-fit: cover;
+			display: block;
+			background: rgba(0,0,0,.25);
+			border: 1px solid rgba(255,255,255,.14);
+		}
+
+		.titles {
+			min-width: 0;
+			line-height: 1.05
+		}
+
+			/* AURA FC появляется “из ниоткуда” + сияет */
+			.titles h1 {
+				margin: 0;
+				font-size: 18px;
+				letter-spacing: .18em;
+				text-transform: uppercase;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				opacity: 0;
+				transform: translateY(10px);
+				animation: titleIn .75s ease-out .10s forwards, titleShine 3.2s linear 1s infinite;
+				background: linear-gradient(90deg, #eaf0ff, #ffd66b, #7b61ff, #2b52ff, #eaf0ff);
+				background-size: 300% 100%;
+				-webkit-background-clip: text;
+				background-clip: text;
+				color: transparent;
+			}
+
+		@keyframes titleIn {
+			to {
+				opacity: 1;
+				transform: translateY(0)
+			}
+		}
+
+		@keyframes titleShine {
+			0% {
+				background-position: 0% 50%
+			}
+
+			100% {
+				background-position: 100% 50%
+			}
+		}
+
+		.titles p {
+			margin: 6px 0 0;
+			color: var(--muted);
+			font-size: 12px;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
+		.chat-btn {
+			border: none;
+			padding: 10px 14px;
+			border-radius: 999px;
+			text-decoration: none;
+			font-size: 13px;
+			font-weight: 800;
+			color: #fff;
+			background: linear-gradient(180deg, rgba(43,82,255,.95), rgba(123,97,255,.95));
+			box-shadow: 0 10px 28px rgba(43,82,255,.30);
+			transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease, background .15s ease;
+			white-space: nowrap;
+			flex: 0 0 auto;
+		}
+
+			.chat-btn:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 14px 40px rgba(255,214,107,.16);
+				opacity: .96;
+				background: linear-gradient(180deg, rgba(255,214,107,.95), rgba(184,138,42,.95));
+			}
+
+		main {
+			position: relative;
+			z-index: 1;
+			max-width: 1200px;
+			margin: 0 auto;
+			padding: 18px 16px 70px;
+		}
+
+		.hero {
+			margin-top: 12px;
+			padding: 18px;
+			border-radius: 22px;
+			border: 1px solid rgba(255,255,255,.12);
+			background: linear-gradient(135deg, rgba(43,82,255,.10), rgba(255,214,107,.06));
+			box-shadow: var(--shadow);
+		}
+
+			.hero h2 {
+				margin: 0;
+				font-size: 22px;
+				letter-spacing: .06em;
+			}
+
+			.hero p {
+				margin: 10px 0 0;
+				color: var(--muted);
+				line-height: 1.5;
+				font-size: 14px;
+			}
+
+		.toolbar {
+			margin-top: 12px;
+			display: flex;
+			gap: 10px;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: space-between;
+		}
+
+		.search {
+			flex: 1 1 240px;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			padding: 10px 12px;
+			border-radius: 14px;
+			border: 1px solid rgba(255,255,255,.12);
+			background: rgba(255,255,255,.05);
+			backdrop-filter: blur(6px);
+		}
+
+			.search input {
+				width: 100%;
+				border: none;
+				outline: none;
+				background: transparent;
+				color: var(--text);
+				font-size: 14px;
+			}
+
+		.pill {
+			flex: 0 0 auto;
+			display: inline-flex;
+			gap: 8px;
+			align-items: center;
+			padding: 10px 12px;
+			border-radius: 14px;
+			border: 1px solid rgba(255,255,255,.12);
+			background: rgba(255,255,255,.05);
+			color: rgba(234,240,255,.86);
+			font-size: 13px;
+			cursor: pointer;
+			user-select: none;
+			transition: transform .12s ease, background .12s ease;
+		}
+
+			.pill:hover {
+				transform: translateY(-1px);
+				background: rgba(255,255,255,.07)
+			}
+
+		.section-title {
+			margin: 26px 0 12px;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			font-size: 14px;
+			letter-spacing: .14em;
+			text-transform: uppercase;
+			color: rgba(234,240,255,.92);
+		}
+
+			.section-title::before {
+				content: "";
+				width: 10px;
+				height: 10px;
+				border-radius: 3px;
+				background: linear-gradient(135deg, var(--blue), var(--gold));
+				box-shadow: 0 0 16px rgba(43,82,255,.35), 0 0 16px rgba(255,214,107,.18);
+			}
+
+		.grid {
+			display: grid;
+			grid-template-columns: 1fr;
+			gap: 14px;
+		}
+
+		@media (min-width:520px) {
+			.grid {
+				grid-template-columns: repeat(2, minmax(0,1fr))
+			}
+		}
+
+		@media (min-width:860px) {
+			.grid {
+				grid-template-columns: repeat(3, minmax(0,1fr))
+			}
+		}
+
+		@media (min-width:1120px) {
+			.grid {
+				grid-template-columns: repeat(4, minmax(0,1fr))
+			}
+		}
+
+		/* НЕОН карточки */
+		.card {
+			position: relative;
+			border-radius: var(--radius);
+			overflow: hidden;
+			background: rgba(255,255,255,.05);
+			border: 1px solid rgba(255,255,255,.10);
+			box-shadow: 0 10px 40px rgba(0,0,0,.35);
+			min-width: 0;
+			cursor: pointer;
+			transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+		}
+
+			.card::before {
+				content: "";
+				position: absolute;
+				inset: -3px;
+				border-radius: calc(var(--radius) + 6px);
+				background: linear-gradient(120deg, var(--blue), var(--violet), var(--gold), var(--blue));
+				background-size: 300% 300%;
+				animation: neonMove 4s linear infinite;
+				filter: blur(12px);
+				opacity: .85;
+				z-index: 0;
+				pointer-events: none;
+			}
+
+			.card::after {
+				content: "";
+				position: absolute;
+				inset: 0;
+				border-radius: var(--radius);
+				border: 1px solid rgba(255,214,107,.18);
+				z-index: 2;
+				pointer-events: none;
+			}
+
+		@keyframes neonMove {
+			0% {
+				background-position: 0% 50%
+			}
+
+			50% {
+				background-position: 100% 50%
+			}
+
+			100% {
+				background-position: 0% 50%
+			}
+		}
+
+		.card:hover {
+			transform: translateY(-3px);
+			box-shadow: 0 18px 60px rgba(0,0,0,.55);
+			border-color: rgba(255,214,107,.30);
+		}
+
+			.card:hover::before {
+				filter: blur(9px);
+				opacity: 1
+			}
+
+		.card > * {
+			position: relative;
+			z-index: 1
+		}
+
+		.media {
+			position: relative;
+			background: rgba(0,0,0,.20)
+		}
+
+		.photo {
+			width: 100%;
+			aspect-ratio: 16/11;
+			object-fit: cover;
+			object-position: center;
+			display: block;
+			filter: saturate(1.05) contrast(1.06);
+		}
+
+		.badge {
+			position: absolute;
+			top: 10px;
+			left: 10px;
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			padding: 7px 10px;
+			border-radius: 999px;
+			background: rgba(0,0,0,.52);
+			border: 1px solid rgba(255,255,255,.16);
+			font-size: 12px;
+			backdrop-filter: blur(6px);
+		}
+
+		.dot {
+			width: 9px;
+			height: 9px;
+			border-radius: 50%;
+			background: var(--gold);
+			box-shadow: 0 0 12px rgba(255,214,107,.55);
+		}
+
+		.info {
+			padding: 12px 12px 14px
+		}
+
+		.name {
+			margin: 0;
+			font-size: 15px;
+			letter-spacing: .02em;
+			word-break: break-word;
+		}
+
+		.meta {
+			margin-top: 6px;
+			color: var(--muted);
+			font-size: 13px;
+			line-height: 1.35;
+		}
+
+		.tag {
+			display: inline-flex;
+			margin-top: 10px;
+			padding: 6px 10px;
+			border-radius: 999px;
+			background: rgba(255,255,255,.08);
+			border: 1px solid rgba(255,255,255,.12);
+			font-size: 12px;
+			color: rgba(234,240,255,.88);
+			gap: 8px;
+			align-items: center;
+		}
+
+			.tag b {
+				color: var(--gold)
+			}
+
+		footer {
+			margin-top: 38px;
+			padding-top: 18px;
+			border-top: 1px solid rgba(255,255,255,.08);
+			color: rgba(234,240,255,.58);
+			font-size: 12px;
+		}
+
+		/* ===== MODAL (доп инфа) ===== */
+		.modal {
+			position: fixed;
+			inset: 0;
+			display: none;
+			place-items: center;
+			background: rgba(0,0,0,.60);
+			backdrop-filter: blur(10px);
+			z-index: 999;
+			padding: 18px;
+		}
+
+			.modal.open {
+				display: grid
+			}
+
+		.modal-card {
+			width: min(920px, 100%);
+			border-radius: 22px;
+			border: 1px solid rgba(255,255,255,.16);
+			background: linear-gradient(180deg, rgba(15,20,35,.92), rgba(10,14,26,.92));
+			box-shadow: 0 30px 90px rgba(0,0,0,.65);
+			overflow: hidden;
+			position: relative;
+		}
+
+			.modal-card::before {
+				content: "";
+				position: absolute;
+				inset: -2px;
+				border-radius: 24px;
+				background: linear-gradient(120deg, var(--blue), var(--violet), var(--gold), var(--blue));
+				background-size: 300% 300%;
+				animation: neonMove 4s linear infinite;
+				filter: blur(14px);
+				opacity: .65;
+				z-index: 0;
+				pointer-events: none;
+			}
+
+		.modal-inner {
+			position: relative;
+			z-index: 1;
+			display: grid;
+			grid-template-columns: 1fr;
+		}
+
+		/* ВАЖНО: на телефоне фото не режем по высоте — пусть подстраивается */
+		.modal-photo {
+			width: 100%;
+			height: auto;
+			max-height: 42vh;
+			object-fit: contain; /* <-- ключ к “не обрезается на телефоне” */
+			background: rgba(0,0,0,.25);
+			display: block;
+		}
+
+		@media (min-width:780px) {
+			.modal-inner {
+				grid-template-columns: 340px 1fr
+			}
+
+			.modal-photo {
+				height: 100%;
+				min-height: 420px;
+				max-height: none;
+				object-fit: cover; /* на ПК красиво заполняет */
+			}
+		}
+
+		.modal-content {
+			padding: 16px 16px 18px
+		}
+
+		.modal-top {
+			display: flex;
+			align-items: flex-start;
+			justify-content: space-between;
+			gap: 12px;
+		}
+
+		.modal-title {
+			margin: 0;
+			font-size: 18px;
+			letter-spacing: .03em;
+		}
+
+		.modal-sub {
+			margin: 6px 0 0;
+			color: var(--muted);
+			font-size: 13px;
+			line-height: 1.35;
+		}
+
+		.close {
+			border: 1px solid rgba(255,255,255,.18);
+			background: rgba(255,255,255,.06);
+			color: var(--text);
+			border-radius: 12px;
+			padding: 8px 10px;
+			cursor: pointer;
+			transition: transform .12s ease, background .12s ease;
+			flex: 0 0 auto;
+		}
+
+			.close:hover {
+				transform: translateY(-1px);
+				background: rgba(255,255,255,.09)
+			}
+
+		.stats {
+			margin-top: 14px;
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0,1fr));
+			gap: 10px;
+		}
+
+		@media (min-width:520px) {
+			.stats {
+				grid-template-columns: repeat(3, minmax(0,1fr))
+			}
+		}
+
+		.stat {
+			border: 1px solid rgba(255,255,255,.12);
+			background: rgba(255,255,255,.05);
+			border-radius: 14px;
+			padding: 10px 10px;
+		}
+
+			.stat .k {
+				font-size: 11px;
+				color: rgba(234,240,255,.65);
+				letter-spacing: .08em;
+				text-transform: uppercase;
+			}
+
+			.stat .v {
+				margin-top: 6px;
+				font-size: 14px;
+				color: rgba(234,240,255,.92);
+				font-weight: 800;
+				word-break: break-word;
+			}
+
+		/* аккуратная анимация появления карточек */
+		.card {
+			opacity: 0;
+			transform: translateY(10px);
+			animation: cardIn .55s ease-out forwards;
+		}
+
+		@keyframes cardIn {
+			to {
+				opacity: 1;
+				transform: translateY(0)
+			}
+		}
+
+		/* уважение к системным настройкам */
+		@media (prefers-reduced-motion: reduce) {
+			* {
+				animation: none !important;
+				transition: none !important
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="glow"></div>
+
+	<header>
+		<div class="topbar">
+			<div class="brand">
+				<div class="top-logo-wrap" title="AURA FC">
+					<img class="top-logo" src="https://i.postimg.cc/1RLm61zj/5344059624543425303.jpg" alt="AURA logo">
+				</div>
+
+				<div class="titles">
+					<h1>AURA FC</h1>
+					<p>Нажми на карточку — откроется доп. инфа</p>
+				</div>
+			</div>
+
+			<a class="chat-btn" href="fan-chat.html">💬 Fan Chat</a>
+		</div>
+	</header>
+
+	<main>
+		<section class="hero">
+			<h2>Состав AURA FC</h2>
+			<p>Кликни по любому тренеру или игроку — откроется карточка с деталями (сильная нога, рост, скорость и т.д.).</p>
+
+			<div class="toolbar">
+				<div class="search">
+					<span style="opacity:.8">🔎</span>
+					<input id="q" type="text" placeholder="Поиск по имени / номеру / позиции…" autocomplete="off">
+				</div>
+				<div class="pill" id="btnAll">✨ Все</div>
+				<div class="pill" id="btnCoaches">🎓 Тренеры</div>
+				<div class="pill" id="btnMain">⚡ Основной</div>
+				<div class="pill" id="btnSubs">🧩 Замены</div>
+			</div>
+		</section>
+
+		<!-- ТРЕНЕРЫ -->
+		<h2 class="section-title" id="sec-coaches">Тренерский состав</h2>
+		<div class="grid" data-group="coaches">
+			<article class="card person"
+      style="background: linear-gradient(180deg,#0a1435,#07102a);"
+					 data-group="coaches"
+					 data-name="Гозалзаде Гусейн"
+					 data-role="Главный тренер"
+					 data-age="14"
+					 data-photo="https://i.postimg.cc/vHjkm5Q9/Chat-GPT-Image-20-dek-2025-g-00-34-50-removebg-preview.png"
+					 data-foot="Правая"
+					 data-height="174"
+					 data-weight="58"
+					 data-speed="24 КМ/Ч"
+					 data-skill="Тактика / мотивация"
+					 data-notes="Главный тренер команды AURA FC.">
+				<div class="media">
+					<img class="photo" src="https://i.postimg.cc/25SJ5GsD/Snimok-ekrana-2025-12-16-235755-removebg-preview.png" alt="Гозалзаде Гусейн">
+					<div class="badge"><span class="dot"></span> Coach</div>
+				</div>
+				<div class="info">
+					<h3 class="name">Гозалзаде Гусейн</h3>
+					<div class="meta">Главный тренер · 14 лет</div>
+					<div class="tag"><b>Role</b> · Head Coach</div>
+				</div>
+			</article>
+
+			<article class="card person"
+					 data-group="coaches"
+					 data-name="Мамедзаде Ибрагим"
+					 data-role="Помощник тренера"
+					 data-age="14"
+					 data-photo="https://i.postimg.cc/QCz4HrZk/Chat-GPT-Image-20-dek-2025-g-00-35-48-removebg-preview.png"
+					 data-foot="Правая"
+					 data-height="180"
+					 data-weight="68"
+					 data-speed="25 КМ/Ч"
+					 data-skill="Подготовка / поддержка"
+					 data-notes="Помощник тренера команды AURA FC.">
+				<div class="media">
+					<img class="photo" src="https://i.postimg.cc/bNbd6HFy/Snimok-ekrana-2025-12-20-000904-removebg-preview.png" alt="Мамедзаде Ибрагим">
+					<div class="badge"><span class="dot"></span> Assistant</div>
+				</div>
+				<div class="info">
+					<h3 class="name">Мамедзаде Ибрагим</h3>
+					<div class="meta">Помощник тренера · 14 лет</div>
+					<div class="tag"><b>Role</b> · Assistant</div>
+				</div>
+			</article>
+		</div>
+
+		<!-- ОСНОВНОЙ СОСТАВ -->
+		<h2 class="section-title" id="sec-main">Основной состав</h2>
+		<div class="grid" data-group="main">
+			<article class="card person"
+					 data-group="main"
+					 data-name="№1 — Ахмедов Юсиф"
+					 data-role="Вратарь (GK)"
+					 data-age="14"
+					 data-photo="https://i.postimg.cc/Gmd3X0y8/Snimok-ekrana-2025-12-16-234518-removebg-preview.png"
+					 data-foot="Правая"
+					 data-height="168"
+					 data-weight="67"
+					 data-speed="19 КМ/Ч"
+					 data-skill="Реакция / сейвы"
+					 data-notes="Уверенный и быстрый.">
+				<div class="media">
+					<img class="photo" src="https://i.postimg.cc/Gmd3X0y8/Snimok-ekrana-2025-12-16-234518-removebg-preview.png" alt="Ахмедов Юсиф">
+					<div class="badge"><span class="dot"></span> #1 · GK</div>
+				</div>
+				<div class="info">
+					<h3 class="name">№1 — Ахмедов Юсиф</h3>
+					<div class="meta">Вратарь · 14 лет</div>
+					<div class="tag"><b>Pos</b> · GK</div>
+				</div>
+			</article>
+
+			<article class="card person"
+					 data-group="main"
+					 data-name="№31 — Намик Рагимов"
+					 data-role="Защитник (DF)"
+					 data-age="14"
+					 data-photo="https://i.postimg.cc/SxMLfMcx/Chat-GPT-Image-20-dek-2025-g-00-22-03-removebg-preview.png"
+					 data-foot="Правая"
+					 data-height="166"
+					 data-weight="57"
+					 data-speed="23 КМ/Ч"
+					 data-skill="Отбор / позиционка"
+					 data-notes="Хорошая игра головой.">
+				<div class="media">
+					<img class="photo" src="https://i.postimg.cc/3xdf5Nps/Snimok-ekrana-2025-12-16-235616-removebg-preview.png" alt="Намик Рагимов">
+					<div class="badge"><span class="dot"></span> #31 · DF</div>
+				</div>
+				<div class="info">
+					<h3 class="name">№31 — Намик Рагимов</h3>
+					<div class="meta">Защитник · 14 лет</div>
+					<div class="tag"><b>Pos</b> · DF</div>
+				</div>
+			</article>
+
+			<article class="card person"
+					 data-group="main"
+					 data-name="№11 — Джавадхан Ахмед"
+					 data-role="Полузащитник (MF)"
+					 data-age="14"
+					 data-photo="https://i.postimg.cc/2531xpst/Chat-GPT-Image-20-dek-2025-g-00-28-56-removebg-preview.png"
+					 data-foot="Правая"
+					 data-height="173"
+					 data-weight="82"
+					 data-speed="22 КМ/Ч"
+					 data-skill="Пас / видение"
+					 data-notes="Умеет командовать игрой.">
+				<div class="media">
+					<img class="photo" src="https://i.postimg.cc/85MPyTtB/IMG-20251010-224717-removebg-preview.png" alt="Джавадхан Ахмед">
+					<div class="badge"><span class="dot"></span> #11 · MF</div>
+				</div>
+				<div class="info">
+					<h3 class="name">№11 — Джавадхан Ахмед</h3>
+					<div class="meta">Полузащитник · 14 лет</div>
+					<div class="tag"><b>Pos</b> · MF</div>
+				</div>
+			</article>
+
+			<article class="card person"
+					 data-group="main"
+					 data-name="№14 — Али Талыбов"
+					 data-role="Полузащитник (MF)"
+					 data-age="14"
+					 data-photo="https://i.postimg.cc/43bXtWd0/Chat-GPT-Image-20-dek-2025-g-00-44-50-removebg-preview.png"
+					 data-foot="Правая"
+					 data-height="177"
+					 data-weight="63"
+					 data-speed="27 КМ/Ч"
+					 data-skill="Дриблинг / скорость"
+					 data-notes="Скорость и контроль мяча.">
+				<div class="media">
+					<img class="photo" src="https://i.postimg.cc/sxPPRdDK/5334861423798063657-1-removebg-preview.png" alt="Али Талыбов">
+					<div class="badge"><span class="dot"></span> #14 · MF</div>
+				</div>
+				<div class="info">
+					<h3 class="name">№14 — Али Талыбов</h3>
+					<div class="meta">Полузащитник · 14 лет</div>
+					<div class="tag"><b>Pos</b> · MF</div>
+				</div>
+			</article>
+
+			<article class="card person"
+					 data-group="main"
+					 data-name="№10 — Юсиф Юсифов"
+					 data-role="Полузащитник (MF)"
+					 data-age="13"
+					 data-photo="https://i.postimg.cc/8PtKFMNB/Chat-GPT-Image-20-dek-2025-g-00-50-41-removebg-preview.png"
+					 data-foot="Правая"
+					 data-height="166"
+					 data-weight="64"
+					 data-speed="27 КМ/Ч"
+					 data-skill="Удар / техника"
+					 data-notes="Штрафные и техника.">
+				<div class="media">
+					<img class="photo" src="https://i.postimg.cc/fTwm0PR0/Snimok-ekrana-2025-12-17-001050-removebg-preview.png" alt="Юсиф Юсифов">
+					<div class="badge"><span class="dot"></span> #10 · MF</div>
+				</div>
+				<div class="info">
+					<h3 class="name">№10 — Юсиф Юсифов</h3>
+					<div class="meta">Полузащитник · 13 лет</div>
+					<div class="tag"><b>Pos</b> · MF</div>
+				</div>
+			</article>
+		</div>
+
+		<!-- ЗАМЕНЫ -->
+		<h2 class="section-title" id="sec-subs">Замены</h2>
+		<div class="grid" data-group="subs">
+			<article class="card person"
+					 data-group="subs"
+					 data-name="№17 — Гозалзаде Гусейн"
+					 data-role="Защитник (SUB)"
+					 data-age="14"
+					 data-photo="https://i.postimg.cc/FKV9HH83/Chat-GPT-Image-20-dek-2025-g-12-34-52-removebg-preview.png"
+					 data-foot="Правая"
+					 data-height="174"
+					 data-weight="58"
+					 data-speed="24 КМ/Ч"
+					 data-skill="Тактика / характер"
+					 data-notes="Запасной игрок.">
+				<div class="media">
+					<img class="photo" src="https://i.postimg.cc/25SJ5GsD/Snimok-ekrana-2025-12-16-235755-removebg-preview.png" alt="Гозалзаде Гусейн">
+					<div class="badge"><span class="dot"></span> #17 · SUB</div>
+				</div>
+				<div class="info">
+					<h3 class="name">№17 — Гозалзаде Гусейн</h3>
+					<div class="meta">Защитник · 14 лет</div>
+					<div class="tag"><b>Status</b> · SUB</div>
+				</div>
+			</article>
+
+			<article class="card person"
+					 data-group="subs"
+					 data-name="№69 — Мамедзаде Ибрагим"
+					 data-role="Полузащитник (SUB)"
+					 data-age="14"
+					 data-photo="https://i.postimg.cc/5tmxhswJ/Chat-GPT-Image-20-dek-2025-g-00-12-43-removebg-preview.png"
+					 data-foot="Правая"
+					 data-height="180"
+					 data-weight="68"
+					 data-speed="25 КМ/Ч"
+					 data-skill="Поддержка / контроль"
+					 data-notes="Запасной игрок.">
+				<div class="media">
+					<img class="photo" src="https://i.postimg.cc/bNbd6HFy/Snimok-ekrana-2025-12-20-000904-removebg-preview.png" alt="Мамедзаде Ибрагим">
+					<div class="badge"><span class="dot"></span> #69 · SUB</div>
+				</div>
+				<div class="info">
+					<h3 class="name">№69 — Мамедзаде Ибрагим</h3>
+					<div class="meta">Полузащитник · 14 лет</div>
+					<div class="tag"><b>Status</b> · SUB</div>
+				</div>
+			</article>
+
+			<article class="card person"
+					 data-group="subs"
+					 data-name="№9 — Джафарзаде Микайл"
+					 data-role="Полузащитник (SUB)"
+					 data-age="14"
+					 data-photo="https://i.postimg.cc/Znjcdztm/5334861423798063686-1-removebg-preview.png"
+					 data-foot="Правая"
+					 data-height="162"
+					 data-weight="57"
+					 data-speed="25 КМ/Ч"
+					 data-skill="Дриблинг / понимание"
+					 data-notes="Запасной игрок.">
+				<div class="media">
+					<img class="photo" src="https://i.postimg.cc/Znjcdztm/5334861423798063686-1-removebg-preview.png" alt="Джафарзаде Микайл">
+					<div class="badge"><span class="dot"></span> #9 · SUB</div>
+				</div>
+				<div class="info">
+					<h3 class="name">№9 — Джафарзаде Микайл</h3>
+					<div class="meta">Полузащитник · 14 лет</div>
+					<div class="tag"><b>Status</b> · SUB</div>
+				</div>
+			</article>
+		</div>
+
+		<footer>© AURA FC</footer>
+	</main>
+
+	<!-- MODAL -->
+	<div class="modal" id="modal">
+		<div class="modal-card" role="dialog" aria-modal="true" aria-label="Информация об игроке">
+			<div class="modal-inner">
+				<img class="modal-photo" id="mPhoto" src="" alt="">
+				<div class="modal-content">
+					<div class="modal-top">
+						<div>
+							<h3 class="modal-title" id="mName">Игрок</h3>
+							<div class="modal-sub" id="mSub">Позиция · возраст</div>
+						</div>
+						<button class="close" id="mClose">✕</button>
+					</div>
+
+					<div class="stats">
+						<div class="stat"><div class="k">Сильная нога</div><div class="v" id="mFoot">—</div></div>
+						<div class="stat"><div class="k">Рост</div><div class="v" id="mHeight">—</div></div>
+						<div class="stat"><div class="k">Вес</div><div class="v" id="mWeight">—</div></div>
+						<div class="stat"><div class="k">Скорость</div><div class="v" id="mSpeed">—</div></div>
+						<div class="stat"><div class="k">Сильные стороны</div><div class="v" id="mSkill">—</div></div>
+						<div class="stat"><div class="k">Заметки</div><div class="v" id="mNotes">—</div></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		// ====== модалка ======
+		const modal = document.getElementById("modal");
+		const mPhoto = document.getElementById("mPhoto");
+		const mName = document.getElementById("mName");
+		const mSub = document.getElementById("mSub");
+		const mFoot = document.getElementById("mFoot");
+		const mHeight = document.getElementById("mHeight");
+		const mWeight = document.getElementById("mWeight");
+		const mSpeed = document.getElementById("mSpeed");
+		const mSkill = document.getElementById("mSkill");
+		const mNotes = document.getElementById("mNotes");
+		const mClose = document.getElementById("mClose");
+
+		function openModal(card) {
+			mPhoto.src = card.dataset.photo || "";
+			mPhoto.alt = card.dataset.name || "";
+
+			mName.textContent = card.dataset.name || "—";
+			mSub.textContent = `${card.dataset.role || "—"} · ${card.dataset.age ? card.dataset.age + " лет" : "—"}`;
+
+			mFoot.textContent = card.dataset.foot || "—";
+			mHeight.textContent = card.dataset.height || "—";
+			mWeight.textContent = card.dataset.weight || "—";
+			mSpeed.textContent = card.dataset.speed || "—";
+			mSkill.textContent = card.dataset.skill || "—";
+			mNotes.textContent = card.dataset.notes || "—";
+
+			modal.classList.add("open");
+			document.body.style.overflow = "hidden";
+		}
+		function closeModal() {
+			modal.classList.remove("open");
+			document.body.style.overflow = "";
+		}
+
+		document.querySelectorAll(".card.person").forEach((card, i) => {
+			card.style.animationDelay = (0.06 * Math.min(i, 12)) + "s";
+			card.addEventListener("click", () => openModal(card));
+		});
+
+		mClose.addEventListener("click", closeModal);
+		modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+		document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
+
+		// ====== поиск + фильтр ======
+		const q = document.getElementById("q");
+		const cards = [...document.querySelectorAll(".card.person")];
+
+		function applyFilter({ group = "all", query = "" }) {
+			const s = query.trim().toLowerCase();
+			cards.forEach(c => {
+				const text = (c.dataset.name + " " + c.dataset.role + " " + (c.querySelector(".meta")?.textContent || "")).toLowerCase();
+				const okQuery = !s || text.includes(s);
+				const okGroup = (group === "all") || (c.dataset.group === group);
+				c.style.display = (okQuery && okGroup) ? "" : "none";
+			});
+		}
+
+		let currentGroup = "all";
+		q.addEventListener("input", () => applyFilter({ group: currentGroup, query: q.value }));
+
+		document.getElementById("btnAll").addEventListener("click", () => {
+			currentGroup = "all"; applyFilter({ group: currentGroup, query: q.value });
+			window.scrollTo({ top: 0, behavior: "smooth" });
+		});
+		document.getElementById("btnCoaches").addEventListener("click", () => {
+			currentGroup = "coaches"; applyFilter({ group: currentGroup, query: q.value });
+			document.getElementById("sec-coaches").scrollIntoView({ behavior: "smooth", block: "start" });
+		});
+		document.getElementById("btnMain").addEventListener("click", () => {
+			currentGroup = "main"; applyFilter({ group: currentGroup, query: q.value });
+			document.getElementById("sec-main").scrollIntoView({ behavior: "smooth", block: "start" });
+		});
+		document.getElementById("btnSubs").addEventListener("click", () => {
+			currentGroup = "subs"; applyFilter({ group: currentGroup, query: q.value });
+			document.getElementById("sec-subs").scrollIntoView({ behavior: "smooth", block: "start" });
+		});
+	</script>
+</body>
+</html>
+    
+  </body>
+  
+</html>
