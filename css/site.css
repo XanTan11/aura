@@ -761,3 +761,7 @@ main, header, footer, section, .hero, .section, .footer{
     height: 40px;
   }
 }
+/* чтобы якоря не залезали под sticky header */
+#last{
+  scroll-margin-top: 90px; /* подстрой если нужно */
+}
