@@ -887,3 +887,16 @@ html{
   align-items: flex-start;
   text-align: left;
 }
+
+/* ===== FORCE LEFT ALIGN FOR LAST MATCH ===== */
+.section__head--stack{
+  flex-direction: column;     /* вместо space-between */
+  align-items: flex-start;    /* ⬅️ СЛЕВА */
+  justify-content: flex-start;
+  text-align: left;
+}
+
+/* чтобы отступы были как у остальных */
+.section__head--stack .section__desc{
+  margin-top: 6px;
+}
