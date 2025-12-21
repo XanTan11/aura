@@ -955,28 +955,60 @@ html{
 }
 
 /* =========================
-   AUTO SCROLL REVEAL
-   (NO HTML CHANGES)
+   GLOBAL SECTION TITLES STYLE (FOR ALL)
    ========================= */
 
-[data-auto-reveal]{
+/* выравнивание как у всех: слева */
+.section__head{
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* одинаковая "рамка" у всех заголовков: Тренеры/Игроки/Замены/Форма/Последний матч */
+.section__title{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 14px;
+  border-radius: 14px;
+
+  border: 1px solid rgba(240,208,122,.22);
+  background: rgba(255,255,255,.04);
+  box-shadow: 0 12px 40px rgba(0,0,0,.18);
+
+  font-weight: 900;
+  letter-spacing: .3px;
+}
+
+/* описание под заголовком — не впритык */
+.section__desc{
+  margin-top: 2px;
+  line-height: 1.55;
+}
+
+/* =========================
+   SCROLL REVEAL ANIMATION
+   ========================= */
+
+/* reval/reveal — класс будет .reveal */
+.reveal{
   opacity: 0;
-  transform: translateY(40px);
-  transition:
-    opacity .7s ease,
-    transform .7s ease;
+  transform: translateY(18px);
+  transition: opacity .55s ease, transform .55s ease;
   will-change: opacity, transform;
 }
 
-[data-auto-reveal].is-visible{
+.reveal.is-visible{
   opacity: 1;
   transform: translateY(0);
 }
 
-/* на телефоне мягче */
+/* на мобилке чуть быстрее/мягче */
 @media (max-width: 620px){
-  [data-auto-reveal]{
-    transform: translateY(28px);
-    transition-duration: .6s;
+  .reveal{
+    transition: opacity .45s ease, transform .45s ease;
   }
 }
