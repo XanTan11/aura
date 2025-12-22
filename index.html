@@ -1,65 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
-
-  <head>
-    <meta charset="UTF-8">
-    <title>Aura</title>
-    <link rel="stylesheet" href="./style.css">
-
-  </head>
-    
-  <body>
-  <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>AURA FC — Official</title>
 
-  <!-- твои пути -->
   <link rel="stylesheet" href="css/site.css" />
 </head>
 <body>
 
-<header class="header">
+<!-- BACKGROUND FX -->
+<div class="bg">
+  <div class="bg__grid"></div>
+  <div class="bg__glow bg__glow--1"></div>
+  <div class="bg__glow bg__glow--2"></div>
+</div>
+
+<header class="header" id="top">
   <div class="container header__inner">
-    <a class="brand" href="#">
+    <a class="brand" href="#top" aria-label="AURA FC Home">
       <span class="brand__text">AURA FC</span>
       <span class="brand__sub">Official Team Page</span>
     </a>
 
+    <nav class="nav">
+      <a class="nav__link" href="#coaches">Тренеры</a>
+      <a class="nav__link" href="#players">Игроки</a>
+      <a class="nav__link" href="#subs">Замены</a>
+      <a class="nav__link" href="#last">Матч</a>
+      <a class="nav__link" href="#kits">Форма</a>
+    </nav>
+
     <a class="btn btn--gold" href="fan-chat.html">Fan Chat</a>
+
+    <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="mobile" id="mobileNav" aria-hidden="true">
+    <a class="mobile__link" href="#coaches">Тренеры</a>
+    <a class="mobile__link" href="#players">Игроки</a>
+    <a class="mobile__link" href="#subs">Замены</a>
+    <a class="mobile__link" href="#last">Матч</a>
+    <a class="mobile__link" href="#kits">Форма</a>
+    <a class="mobile__link mobile__link--gold" href="fan-chat.html">Fan Chat</a>
   </div>
 </header>
 
 <main>
+
   <!-- HERO -->
   <section class="hero">
     <div class="container hero__inner">
       <div class="hero__left">
-        <h1 class="hero__title">AURA FC</h1>
-        <p class="hero__desc">
+        <div class="pill reveal">
+          <span class="dot"></span>
+          <span>Season 25/26</span>
+        </div>
+
+        <h1 class="hero__title reveal">AURA FC</h1>
+        <p class="hero__desc reveal">
           Состав команды: тренеры, игроки и замены. Нажми на карточку — откроется фото и доп. инфа.
         </p>
 
-        <!-- ✅ добавил "Форма" -->
-        <div class="hero__actions">
-  <a class="btn" href="#coaches">Тренеры</a>
-  <a class="btn" href="#players">Игроки</a>
-  <a class="btn" href="#subs">Замены</a>
-  <a class="btn" href="#last">Матч</a>
-  <a class="btn" href="#kits">Форма</a>
-</div>
+        <div class="hero__actions reveal">
+          <a class="btn" href="#coaches">Тренеры</a>
+          <a class="btn" href="#players">Игроки</a>
+          <a class="btn" href="#subs">Замены</a>
+          <a class="btn" href="#last">Матч</a>
+          <a class="btn" href="#kits">Форма</a>
+        </div>
 
+        <div class="hero__stats reveal">
+          <div class="stat">
+            <div class="stat__num" data-count="10">0</div>
+            <div class="stat__txt">Energy</div>
+          </div>
+          <div class="stat">
+            <div class="stat__num" data-count="25">0</div>
+            <div class="stat__txt">Chemistry</div>
+          </div>
+          <div class="stat">
+            <div class="stat__num" data-count="26">0</div>
+            <div class="stat__txt">Season</div>
+          </div>
+        </div>
       </div>
 
-      <div class="hero__right">
-        <img
-          id="auraLogo"
-          class="aura-logo"
-          src="https://i.postimg.cc/kgNWmM23/5344059624543425303-1-removebg-preview.png"
-          alt="AURA FC Logo"
-        />
+      <div class="hero__right reveal">
+        <div class="logoFrame" aria-hidden="true">
+          <img
+            id="auraLogo"
+            class="aura-logo"
+            src="https://i.postimg.cc/kgNWmM23/5344059624543425303-1-removebg-preview.png"
+            alt="AURA FC Logo"
+          />
+        </div>
       </div>
     </div>
   </section>
@@ -68,17 +105,18 @@
   <section class="section" id="coaches">
     <div class="container">
       <div class="section__head">
-        <h2 class="section__title">Тренеры</h2>
-        <p class="section__desc">2 карточки тренеров.</p>
+        <h2 class="section__title reveal">Тренеры</h2>
+        <p class="section__desc reveal">2 карточки тренеров.</p>
       </div>
 
       <div class="grid">
-        <article class="card"
+        <article class="card reveal"
           data-title="Главный тренер — Gozalzade Huseyn"
           data-role="Head Coach"
           data-meta="Стиль: высокий прессинг • Схема: 4-3-3"
           data-extra="Сильные стороны: дисциплина, быстрые перестроения, контроль темпа."
           data-img="https://i.postimg.cc/vHjkm5Q9/Chat-GPT-Image-20-dek-2025-g-00-34-50-removebg-preview.png">
+          <div class="card__fx"></div>
           <div class="card__top">
             <div class="avatar avatar--gold">GH</div>
             <span class="tag">COACH</span>
@@ -88,12 +126,13 @@
           <button class="card__btn" type="button">Открыть</button>
         </article>
 
-        <article class="card"
+        <article class="card reveal"
           data-title="Помощник тренера — Mammadzade Ibrahim"
           data-role="Assistant Coach"
           data-meta="Сильные стороны: физика • Скорость"
           data-extra="Отвечает за физподготовку, восстановление и интенсивность тренировок."
           data-img="https://i.postimg.cc/QCz4HrZk/Chat-GPT-Image-20-dek-2025-g-00-35-48-removebg-preview.png">
+          <div class="card__fx"></div>
           <div class="card__top">
             <div class="avatar">MI</div>
             <span class="tag tag--blue">ASSIST</span>
@@ -110,17 +149,18 @@
   <section class="section" id="players">
     <div class="container">
       <div class="section__head">
-        <h2 class="section__title">Игроки</h2>
-        <p class="section__desc">5 игроков основы.</p>
+        <h2 class="section__title reveal">Игроки</h2>
+        <p class="section__desc reveal">5 игроков основы.</p>
       </div>
 
       <div class="grid">
-        <article class="card"
+        <article class="card reveal"
           data-title="#99 — Akhmedov Yusif (GK)"
           data-role="Goalkeeper"
           data-meta="Сильные стороны: реакция • 1v1 • игра на линии"
           data-extra="Быстрый ввод мяча, уверенные сейвы, хорошая позиция."
           data-img="https://i.postimg.cc/jjDwjycc/Chat-GPT-Image-20-dek-2025-g-19-24-17-removebg-preview.png">
+          <div class="card__fx"></div>
           <div class="card__top">
             <div class="avatar">AY</div>
             <span class="tag">PLAYER</span>
@@ -130,12 +170,13 @@
           <button class="card__btn" type="button">Открыть</button>
         </article>
 
-        <article class="card"
+        <article class="card reveal"
           data-title="#31 — Rahimov Namik (CB)"
           data-role="Center Back"
           data-meta="Сильные стороны: отбор • блоки • воздух"
           data-extra="Надёжная оборона, борьба, игра корпусом."
           data-img="https://i.postimg.cc/SxMLfMcx/Chat-GPT-Image-20-dek-2025-g-00-22-03-removebg-preview.png">
+          <div class="card__fx"></div>
           <div class="card__top">
             <div class="avatar">RN</div>
             <span class="tag">PLAYER</span>
@@ -145,14 +186,14 @@
           <button class="card__btn" type="button">Открыть</button>
         </article>
 
-        <!-- ✅ капитан (data-captain="true") -->
-        <article class="card"
+        <article class="card reveal"
           data-title="#11 — Ahmed Javadkhan (MF)"
           data-role="Midfielder"
           data-meta="Сильное: перехваты • контроль • пас"
           data-extra="Опорник, закрывает зоны, помогает защите."
           data-img="https://i.postimg.cc/2531xpst/Chat-GPT-Image-20-dek-2025-g-00-28-56-removebg-preview.png"
           data-captain="true">
+          <div class="card__fx"></div>
           <div class="card__top">
             <div class="avatar">AJ</div>
             <span class="tag">PLAYER</span>
@@ -162,12 +203,13 @@
           <button class="card__btn" type="button">Открыть</button>
         </article>
 
-        <article class="card"
+        <article class="card reveal"
           data-title="#14 — Talibov Ali (MF)"
           data-role="Midfielder"
           data-meta="Сильные стороны: видение • скорость • физика"
           data-extra="Плеймейкер, создаёт моменты, тонкий пас."
           data-img="https://i.postimg.cc/43bXtWd0/Chat-GPT-Image-20-dek-2025-g-00-44-50-removebg-preview.png">
+          <div class="card__fx"></div>
           <div class="card__top">
             <div class="avatar">TA</div>
             <span class="tag">PLAYER</span>
@@ -177,12 +219,13 @@
           <button class="card__btn" type="button">Открыть</button>
         </article>
 
-        <article class="card"
+        <article class="card reveal"
           data-title="#10 — Yusifov Yusif (MF)"
           data-role="Midfielder"
           data-meta="Сильные стороны: завершение • открывания • удар"
           data-extra="Игра в касание, хорошие удары в штрафной."
           data-img="https://i.postimg.cc/8PtKFMNB/Chat-GPT-Image-20-dek-2025-g-00-50-41-removebg-preview.png">
+          <div class="card__fx"></div>
           <div class="card__top">
             <div class="avatar">YY</div>
             <span class="tag">PLAYER</span>
@@ -199,17 +242,18 @@
   <section class="section" id="subs">
     <div class="container">
       <div class="section__head">
-        <h2 class="section__title">Замены</h2>
-        <p class="section__desc">3 карточки замен.</p>
+        <h2 class="section__title reveal">Замены</h2>
+        <p class="section__desc reveal">3 карточки замен.</p>
       </div>
 
       <div class="grid">
-        <article class="card card--sub"
+        <article class="card card--sub reveal"
           data-title="#17 — Gozalzade Huseyn (MF)"
           data-role="Midfielder"
           data-meta="Сильные стороны: кроссы • подключение • отбор"
           data-extra="Усиливает фланг и помогает в обороне."
           data-img="https://i.postimg.cc/FKV9HH83/Chat-GPT-Image-20-dek-2025-g-12-34-52-removebg-preview.png">
+          <div class="card__fx"></div>
           <div class="card__top">
             <div class="avatar">GH</div>
             <span class="tag tag--sub">SUB</span>
@@ -219,12 +263,13 @@
           <button class="card__btn" type="button">Открыть</button>
         </article>
 
-        <article class="card card--sub"
+        <article class="card card--sub reveal"
           data-title="#69 — Mammadzade Ibrahim (MF)"
           data-role="Midfielder"
           data-meta="Сильные стороны: удержание • темп • пас"
           data-extra="Держит мяч, помогает выйти из прессинга."
           data-img="https://i.postimg.cc/5tmxhswJ/Chat-GPT-Image-20-dek-2025-g-00-12-43-removebg-preview.png">
+          <div class="card__fx"></div>
           <div class="card__top">
             <div class="avatar">MI</div>
             <span class="tag tag--sub">SUB</span>
@@ -234,12 +279,13 @@
           <button class="card__btn" type="button">Открыть</button>
         </article>
 
-        <article class="card card--sub"
+        <article class="card card--sub reveal"
           data-title="#9 — Jafarzadeh Mikail (MF)"
           data-role="Midfielder"
           data-meta="Сильные стороны: скорость • 1v1 • контроль мяча"
           data-extra="Выходит на уставшего защитника, обостряет с фланга."
           data-img="https://i.postimg.cc/Znjcdztm/5334861423798063686-1-removebg-preview.png">
+          <div class="card__fx"></div>
           <div class="card__top">
             <div class="avatar avatar--gold">JM</div>
             <span class="tag tag--sub">SUB</span>
@@ -252,62 +298,66 @@
     </div>
   </section>
 
-<!-- LAST MATCH -->
+  <!-- LAST MATCH -->
+  <section class="section section--match" id="last">
+    <div class="container">
+      <div class="section__head">
+        <h2 class="section__title reveal">Последний матч</h2>
+        <p class="section__desc reveal">Счёт последнего матча команды.</p>
+      </div>
 
-<section class="section section--match" id="last">
-  <div class="container">
-    <div class="section__head">
-      <h2 class="section__title">Последний матч</h2>
-      <p class="section__desc">Счёт последнего матча команды.</p>
+      <div class="match-card reveal">
+        <div class="match-team match-team--left">
+          <span>AURA FC</span>
+          <img src="https://i.postimg.cc/kgNWmM23/5344059624543425303-1-removebg-preview.png" alt="AURA FC">
+        </div>
+
+        <div class="match-score">
+          <span>1</span>
+          <span class="colon">:</span>
+          <span>1</span>
+        </div>
+
+        <div class="match-team match-team--right">
+          <img src="https://i.postimg.cc/ZqFd26bR/5348571247169703195-removebg-preview.png" alt="PRIME FC">
+          <span>PRIME FC</span>
+        </div>
+      </div>
     </div>
+  </section>
 
-<div class="match-card">
-  <div class="match-team match-team--left">
-    <span>AURA FC</span>
-    <img src="https://i.postimg.cc/kgNWmM23/5344059624543425303-1-removebg-preview.png" alt="AURA FC">
-  </div>
-
-  <div class="match-score">
-    <span>1</span>
-    <span class="colon">:</span>
-    <span>1</span>
-  </div>
-
-  <div class="match-team match-team--right">
-    <img src="https://i.postimg.cc/ZqFd26bR/5348571247169703195-removebg-preview.png" alt="PRIME FC">
-    <span>PRIME FC</span>
-  </div>
-</div>
-
-
-  <!-- ✅ KITS 25/26 -->
+  <!-- KITS -->
   <section class="section" id="kits">
     <div class="container">
       <div class="section__head">
-        <h2 class="section__title">Форма 25/26</h2>
-        <p class="section__desc">Домашняя и гостевая форма сезона 2025/2026.</p>
+        <h2 class="section__title reveal">Форма 25/26</h2>
+        <p class="section__desc reveal">Домашняя и гостевая форма сезона 2025/2026.</p>
       </div>
 
       <div class="kits">
-        <div class="kits__group">
+        <div class="kits__group reveal">
           <h3 class="kits__title">Домашняя форма</h3>
           <div class="kits__row">
             <div class="kit-card">
+              <div class="kit-card__fx"></div>
               <img src="https://i.postimg.cc/x1Mp4pB6/1000053406-removebg-preview.png" alt="Домашняя форма — футболка" />
             </div>
             <div class="kit-card">
+              <div class="kit-card__fx"></div>
               <img src="https://i.postimg.cc/jqBG3fLL/1000053404-removebg-preview.png" alt="Домашняя форма — шорты" />
             </div>
           </div>
         </div>
 
-        <div class="kits__group">
+        <div class="kits__group reveal">
           <h3 class="kits__title">Гостевая форма</h3>
           <div class="kits__row">
             <div class="kit-card">
+              <div class="kit-card__fx"></div>
               <img src="https://i.postimg.cc/SN7DLY9T/1766252242684.png" alt="Гостевая форма — футболка" />
             </div>
             <div class="kit-card">
+              <div class="kit-card__fx"></div>
               <img src="https://i.postimg.cc/SQcrqYgf/1766252321205.png" alt="Гостевая форма — шорты" />
             </div>
           </div>
@@ -329,7 +379,7 @@
 <div class="modal" id="modal" aria-hidden="true">
   <div class="modal__overlay" data-close="true"></div>
 
-  <div class="modal__box" role="dialog" aria-modal="true">
+  <div class="modal__box" role="dialog" aria-modal="true" aria-label="Информация">
     <button class="modal__close" data-close="true" aria-label="Закрыть">✕</button>
 
     <div class="modal__head">
@@ -339,6 +389,7 @@
 
     <div class="modal__imageWrap" id="mImgWrap">
       <img id="mImg" alt="Фото" />
+      <div class="captainBadge" id="captainBadge" hidden>CAPTAIN</div>
     </div>
 
     <div class="modal__meta" id="mMeta"></div>
@@ -353,9 +404,4 @@
 
 <script src="js/site.js"></script>
 </body>
-</html>
-    <script  src="./script.js"></script>
-
-  </body>
-  
 </html>
