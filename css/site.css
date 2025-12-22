@@ -977,3 +977,27 @@ main, .page, .container, .wrap {
     height: auto;
   }
 }
+
+/* === MOBILE FIX: white bar + overflow === */
+html, body {
+  height: 100%;
+  background: #050a1a;          /* чтобы НИГДЕ не просвечивал белый */
+  overflow-x: hidden;            /* режем вылезание вправо */
+}
+
+body {
+  min-height: 100dvh;            /* правильная высота на мобилках */
+}
+
+@supports not (height: 100dvh) {
+  body { min-height: 100vh; }    /* fallback */
+}
+
+/* частая причина белых полос — элементы/картинки выходят за экран */
+*, *::before, *::after { box-sizing: border-box; }
+img, svg, video, canvas { max-width: 100%; height: auto; display: block; }
+
+/* если у тебя где-то есть 100vw — это может давать вылезание из-за скроллбара */
+.fullwidth, .container, .wrap, main, header, section {
+  max-width: 100%;
+}
