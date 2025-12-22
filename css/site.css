@@ -1015,3 +1015,27 @@ html{
     transition-duration: .7s;
   }
 }
+
+/* ===== REVEAL ON SCROLL (PASTE AT END) ===== */
+.reveal{
+  opacity: 0;
+  transform: translateY(18px);
+  filter: blur(2px);
+  transition: opacity .65s ease, transform .65s ease, filter .65s ease;
+  will-change: opacity, transform, filter;
+}
+
+.reveal.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* чтобы важные штуки не ломались */
+.aura-logo,
+.modal,
+.header{
+  transform: none;
+  filter: none;
+  opacity: 1;
+}
