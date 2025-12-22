@@ -146,3 +146,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
   observer.observe(bottomContent);
 });
+
+// ===== REVEAL ON SCROLL (PASTE AT END) =====
+(() => {
+  // Что анимируем (можешь добавлять/убирать селекторы)
+  const targets = [
+    ".section",
+    ".card",
+    ".match-card",
+    ".kit-card",
+    ".footer"
+  ];
+
+  const nodes = document.querySelectorAll(targets.join(","));
+
+  // НЕ трогаем лого (чтобы не пропадало)
+  nodes.forEach(el => {
+    if (el.classList.contains("aura-logo")) return;
+    if (el.closest(".modal")) return;         // модалку не анимируем
+    el.classList.add("reveal");
+  });
+
+  // Если браузер не поддерживает Observer — просто показываем
+  if (!("IntersectionObserver" in window)) {
+    document.querySelectorAll(".reveal").forEach(el => el.classList.add("is-visible"));
+    return;
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        io.unobserve(entry.target); // один раз показал — хватит
+      }
+    });
+  }, {
+    root: null,
+    threshold
