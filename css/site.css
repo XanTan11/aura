@@ -945,36 +945,3 @@ main, .page, .container, .wrap {
   .header{ transition: none; }
 }
 
-/* ===== MOBILE ONLY FIX ===== */
-@media (max-width: 768px){
-
-  html, body{
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;   /* ключевая строка */
-    background: #070b14;  /* твой тёмный фон, чтобы не было белого */
-  }
-
-  /* 100vw — главный враг на мобилке */
-  *{
-    max-width: 100%;
-  }
-
-  /* часто виновники */
-  header,
-  section,
-  main,
-  .hero,
-  .container,
-  .wrap{
-    max-width: 100%;
-    overflow-x: hidden;
-  }
-
-  /* изображения */
-  img, video, canvas, svg{
-    max-width: 100%;
-    height: auto;
-  }
-}
-
