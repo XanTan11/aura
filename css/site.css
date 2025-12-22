@@ -1012,4 +1012,28 @@ body{
   .header{ transition: none; }
 }
 
+/* ===== FINAL FIX: header always centered (paste at end) ===== */
+.header{
+  position: fixed;
+  top: 12px;
+  left: 50% !important;
+  right: auto !important;
+  width: min(1150px, 92vw) !important;
+
+  transform: translateX(-50%) translateY(0) !important;
+  box-sizing: border-box;
+
+  transition: transform .35s ease, opacity .25s ease, filter .35s ease;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+/* hidden state */
+.header.is-hidden{
+  transform: translateX(-50%) translateY(-140%) !important;
+  opacity: 0;
+  filter: blur(2px);
+  pointer-events: none;
+}
+
 
